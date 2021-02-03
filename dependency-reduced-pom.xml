@@ -17,12 +17,12 @@
       </plugin>
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>2.22.1</version>
+        <version>2.22.2</version>
         <dependencies>
           <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.7.0</version>
+            <version>${org.junit.jupiter.version}</version>
           </dependency>
         </dependencies>
       </plugin>
@@ -41,6 +41,22 @@
                   <mainClass>org.example.App</mainClass>
                 </transformer>
               </transformers>
+              <artifactSet>
+                <excludes>
+                  <exclude>org.junit.jupiter:junit-jupiter-engine</exclude>
+                  <exclude>org.springframework:spring-test</exclude>
+                </excludes>
+              </artifactSet>
+              <filters>
+                <filter>
+                  <artifact>*:*</artifact>
+                  <excludes>
+                    <exclude>META-INF/MANIFEST.MF</exclude>
+                    <exclude>META-INF/spring.*</exclude>
+                    <exclude>META-INF/*.txt</exclude>
+                  </excludes>
+                </filter>
+              </filters>
             </configuration>
           </execution>
         </executions>
@@ -77,6 +93,7 @@
   </dependencies>
   <properties>
     <org.springframework.version>5.3.3</org.springframework.version>
+    <org.junit.jupiter.version>5.7.0</org.junit.jupiter.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <jdk.version>1.8</jdk.version>
   </properties>
